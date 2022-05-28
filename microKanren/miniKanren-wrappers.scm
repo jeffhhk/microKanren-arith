@@ -23,10 +23,15 @@
       (lambda (x0)
         (fresh (x ...) g0 g ...))))))
 
+(define fail (== 1 2))
+(define succeed (== 1 1))
+
 (define-syntax conde
-  (syntax-rules ()
-    ((_ (g0 g ...) ...)
-     (disj+ (conj+ g0 g ...) ...))))
+  (syntax-rules (else)
+    ((_) fail)
+    ((_ (else g0 g ...)) (conj+ g0 g ...))
+    ((_ (g0 g ...) c ...)
+     (disj+ (conj+ g0 g ...) (conde c ...)))))
 
 (define-syntax run
   (syntax-rules ()
