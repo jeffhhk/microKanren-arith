@@ -3,7 +3,7 @@
 
 (define-syntax Zzz
   (syntax-rules ()
-    ((_ g) (lambda (s/c) (lambda () (g s/c))))))
+    ((_ g) (lambdag@ (s/c) (lambda () (applyg@ g s/c))))))
 
 (define-syntax conj+
   (syntax-rules ()
@@ -45,7 +45,7 @@
 
 (define empty-state '(() . 0))
 
-(define (call/goal g) (g empty-state))
+(define (call/goal g) (applyg@ g empty-state))
 
 (define (pull $)
   (if (procedure? $) (pull ($)) $))

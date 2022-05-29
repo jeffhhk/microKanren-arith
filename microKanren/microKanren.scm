@@ -11,8 +11,16 @@
 
 (define (ext-s x v s) `((,x . ,v) . ,s))
 
+(define-syntax lambdag@
+  (syntax-rules ()
+    ((_ (s) e) (cons 'goal (lambda (s) e)))))
+
+(define-syntax applyg@
+  (syntax-rules ()
+    ((_ g e) ((cdr g) e))))
+
 (define (== u v)
-  (lambda (s/c)
+  (lambdag@ (s/c)
     (let ((s (unify u v (car s/c))))
       (if s (unit `(,s . ,(cdr s/c))) mzero))))
 
@@ -31,12 +39,12 @@
       (else (and (eqv? u v) s)))))
 
 (define (call/fresh f)
-  (lambda (s/c)
+  (lambdag@ (s/c)
     (let ((c (cdr s/c)))
-      ((f (var c)) `(,(car s/c) . ,(+ c 1))))))
+      (applyg@ (f (var c)) `(,(car s/c) . ,(+ c 1))))))
 
-(define (disj g1 g2) (lambda (s/c) (mplus (g1 s/c) (g2 s/c))))
-(define (conj g1 g2) (lambda (s/c) (bind (g1 s/c) g2)))
+(define (disj g1 g2) (lambdag@ (s/c) (mplus (applyg@ g1 s/c) (applyg@ g2 s/c))))
+(define (conj g1 g2) (lambdag@ (s/c) (bind (applyg@ g1 s/c) g2)))
 
 (define (mplus $1 $2)
   (cond
@@ -48,4 +56,4 @@
   (cond
     ((null? $) mzero)
     ((procedure? $) (lambda () (bind ($) g)))
-    (else (mplus (g (car $)) (bind (cdr $) g)))))
+    (else (mplus (applyg@ g (car $)) (bind (cdr $) g)))))
