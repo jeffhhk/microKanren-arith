@@ -15,7 +15,7 @@
 |#
 (define trace-var-list
   (lambda (fmt ivs)
-    (lambda (s/c)
+    (lambdag@ 'trace-var-list (s/c)
       (let ((xs (map (lambda (iv) (reify-var iv s/c)) ivs)))
 	(printf fmt xs)
 	(unit s/c)))))
