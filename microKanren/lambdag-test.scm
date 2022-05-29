@@ -1,32 +1,32 @@
 (load "microKanren.scm")
 (load "miniKanren-wrappers.scm")
 
-(lambdag@ (s/c)
+(lambdag@ 'test (s/c)
 	  (unit s/c))
 
 (call/goal
- (lambdag@ (s/c)
+ (lambdag@ 'test (s/c)
 	   (unit s/c)))
 
 (expand
  '(take 5
 	(call/goal
-	 (lambdag@ (s/c)
+	 (lambdag@ 'test (s/c)
 		   (unit s/c)))))
 (take 5
       (call/goal
-       (lambdag@ (s/c)
+       (lambdag@ 'test (s/c)
 		 (unit s/c))))
 
 (expand
  '(call/goal
    (fresh (q)
-	  (lambdag@ (s/c)
+	  (lambdag@ 'test (s/c)
 		    (unit s/c)))))
 
 (call/goal
  (fresh (q)
-	(lambdag@ (s/c)
+	(lambdag@ 'test (s/c)
 		  (unit s/c))))
 
 
@@ -35,12 +35,12 @@
  reify-1st
  (take 5
        (call/goal
-	(lambdag@ (s/c)
+	(lambdag@ 'test (s/c)
 		  (unit s/c)))))
 
 (expand
  '(run 5 (q)
-     (lambdag@ (s/c)
+     (lambdag@ 'test (s/c)
 	       (unit s/c))))
 #|(#2%map
   reify-1st
@@ -61,28 +61,28 @@
                   #{s/c dd0bdng6ohnfmagibum0x42-22})))))))))|#
 
 (run 5 (q)
-     (lambdag@ (s/c)
+     (lambdag@ 'test (s/c)
 	       (unit s/c)))
 
 (applyg@
- (lambdag@ (s/c)
+ (lambdag@ 'test (s/c)
 	   (unit s/c))
  empty-state)
 
 (run 5 (q)
- (lambdag@ (s/c)
+ (lambdag@ 'test (s/c)
 	   (unit s/c)))
 
 (run 5 (q)
      (== q 5))
 
 (applyg@
- (lambdag@ (q) (== q 5))
+ (lambdag@ 'test (q) (== q 5))
  empty-state)
 ;; (oops . #<procedure>)
 
 (applyg@
- (fresh (q) (lambdag@ (s/c) (unit s/c)))
+ (fresh (q) (lambdag@ 'test (s/c) (unit s/c)))
  empty-state)
 
 
