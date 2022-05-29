@@ -1,15 +1,4 @@
 
-;;;; from TheReasonedSchemer/mk.scm
-
-(define-syntax lambdag@
-  (syntax-rules ()
-    ((_ (s) e) (lambda (s) e))))
-
-(define-syntax lambdaf@
-  (syntax-rules ()
-    ((_ () e) (lambda () e))))
-
-
 ;;; generalized from microKanren/miniKanren-wrappers.scm reify-1st
 (define (reify-var iv s/c)         ;; iv=#(2) 
   (let* ((v (walk* iv (car s/c)))  ;; v=(#(9) #(12) . #(13)) 
