@@ -9,7 +9,7 @@
 ;;; find pythagorean triples
 (time
  (pretty-print
-  (run 3 (A)
+  (run 1 (A)
        (fresh (a b c a2 b2 c2)
 	      (== A (list a b c))
 	      (<o (build-num 0) a)     ; zeros don't count
