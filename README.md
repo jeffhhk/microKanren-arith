@@ -3,7 +3,7 @@
 This repository integrates:
 
 - Jason Hemann et al microKanren
-- Whole numbers "oleg numbers" as implemented by faster-miniKanren
+- Whole numbers "Oleg numbers" as implemented by faster-miniKanren
 - A routine trace-var-list for printing values in microKanren programs
 - Instrumentation of goal constructors so that in a debugger, goals appear tagged with their constructor instead of their procedure alone
 
