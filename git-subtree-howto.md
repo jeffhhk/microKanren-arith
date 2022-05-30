@@ -117,6 +117,10 @@ Just commit as if the subtree were in the parent repository.  Here is one commit
 
 If your intention is to eventually push a subtree commit upstream, it is best to take care not to mix files from the subtree and files elsewhere in the same commit.
 
+## Integrate a subtree with truncated change history
+
+If pre-integration history of the upstream repository is not interesting, passing the flag --squash to git subtree add will present the subtree history as a single commit instead of its entire history.
+
 # End demonstration
 
 This repository currently only demonstrates creation of subtrees.  For a general tutorial on subtrees, see the following repository:
