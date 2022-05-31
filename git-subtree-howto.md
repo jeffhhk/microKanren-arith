@@ -19,11 +19,23 @@ Different:
 
 # How to
 
-## Create repo
+The actions listed are associated with two roles: producer and consumer of the parent repository.
+
+By convention the following demonstration names all remotes associated with subtrees starting with "subtree-" and ending with the name of the subtree directory.
+
+As mentioned above, consumers of parent repositories need not be concerned with remotes.
+
+## Consumer: Clone repository
+
+Consuming a repository with subtrees is no different from consuming a repository without subtrees:
+
+    git clone https://github.com/jeffhhk/microKanren-arith
+
+## Producer: Create repository
     git init
     git commit --allow-empty -m "create repository"
 
-## Add subtree
+## Producer: Add subtree
 
     git remote add subtree-microKanren https://github.com/jasonhemann/microKanren
     git fetch subtree-microKanren
@@ -59,7 +71,7 @@ result:
 
               create repository
 
-## Add a second subtree
+## Producer: Add a second subtree
 
     git remote add subtree-faster-miniKanren https://github.com/michaelballantyne/faster-miniKanren
     git fetch subtree-faster-miniKanren
@@ -92,7 +104,7 @@ result:
         | | 
         | |     revise racket module wrappers to expose internals in private-unstable.rkt
 
-## Change contents of a subtree
+## Producer: Change contents of a subtree
 
 Just commit as if the subtree were in the parent repository.  Here is one commit on the parent repository followed by one commit on a subtree:
 
@@ -117,7 +129,7 @@ Just commit as if the subtree were in the parent repository.  Here is one commit
 
 If your intention is to eventually push a subtree commit upstream, it is best to take care not to mix files from the subtree and files elsewhere in the same commit.
 
-## Integrate a subtree with truncated change history
+## Producer: Integrate a subtree with truncated change history
 
 If pre-integration history of the upstream repository is not interesting, passing the flag --squash to git subtree add will present the subtree history as a single commit instead of its entire history.
 
